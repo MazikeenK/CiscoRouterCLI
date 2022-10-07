@@ -1,0 +1,60 @@
+-------------- Lab 11.2 -----------------
+
+(Richard)
+interface GigabitEthernet0/0
+ no ip address
+ duplex auto
+ speed auto
+ ipv6 address 2001:DB8:DAD3::1/64
+exit
+interface GigabitEthernet0/1
+ no ip address
+ duplex auto
+ speed auto
+ ipv6 address 2001:DB8:DAD4::1/64
+exit
+interface GigabitEthernet0/2
+ no ip address
+ duplex auto
+ speed auto
+ ipv6 address 2001:DB8:DAD5::1/64
+exit
+interface GigabitEthernet0/0
+ no shutdown
+exit
+interface GigabitEthernet0/1
+ no shutdown
+exit
+interface GigabitEthernet0/2
+ no shutdown
+exit
+
+(Addy)
+interface GigabitEthernet0/0
+ no ip address
+ duplex auto
+ speed auto
+ ipv6 address autoconfig
+ ipv6 enable
+ No shutdown
+exit
+
+(Kahlan)
+interface GigabitEthernet0/0
+ no ip address
+ duplex auto
+ speed auto
+ ipv6 address autoconfig
+ ipv6 enable
+ No shutdown
+exit
+
+(Zedd)
+interface GigabitEthernet0/0
+ no ip address
+ duplex auto
+ speed auto
+ ipv6 address autoconfig
+ ipv6 enable
+ No shutdown
+exit

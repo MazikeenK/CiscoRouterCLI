@@ -1,0 +1,275 @@
+https://www.cisco.com/c/en/us/td/docs/iosxr/ncs5000/interfaces/b-ncs5000-interfaces-cli-reference/b-ncs5000-interfaces-cli-reference_chapter_0110.pdf
+
+------------Lab 6.1-----------------
+
+(Hersey)
+
+vlan 10
+name Reese
+exit
+vlan 11
+name Pieces
+exit
+
+int Fa0/10
+switchport mode access
+switchport access vlan 10
+int Fa0/11
+switchport mode access
+switchport access vlan 11
+exit
+
+int Gi0/1
+switchport mode trunk
+
+
+(Cadbury)
+
+int Gi0/1
+no shutdown
+exit
+
+interface GigabitEthernet0/1.10
+encapsulation dot1q 10
+ip address 192.168.10.1 255.255.255.0
+exit
+interface GigabitEthernet0/1.11
+encapsulation dot1q 11
+ip address 192.168.11.1 255.255.255.0
+
+
+-------------End Of Lab 6.1-------------------
+
+
+
+------------Lab 6.2-----------------
+
+(Kasumi)
+
+ip address 10.111.1.1 255.255.255.0
+
+ip route 10.11.11.0 255.255.255.0 10.1.11.1
+ip route 10.11.22.0 255.255.255.0 10.1.22.1
+ip route 10.111.1.0 255.255.255.0 Gi0/0
+
+
+(Zaeed)
+
+int gi0/0		
+ip address 10.111.1.2 255.255.255.0
+exit
+int gi0/1.1
+encapsulation dot1q 1
+ip address 10.1.1.1 255.255.255.0
+exit
+int gi0/1.11
+encapsulation dot1q 11
+ip address 10.1.11.1 255.255.255.0
+exit
+int gi0/1.22
+encapsulation dot1q 22
+ip address 10.1.22.1 255.255.255.0
+exit
+int Gi0/1
+no shutdown
+
+(Javik)
+vlan 11
+name GOTO
+exit
+vlan 22
+name MASSANI
+exit
+int vlan 1
+ip address 10.1.1.5 255.255.255.0
+no shutdown
+exit
+
+int Fa0/11
+switchport mode access
+switchport access vlan 11
+exit
+int Fa0/22
+switchport mode access
+switchport access vlan 22
+exit
+int Fa0/1
+switchport mode trunk
+no shutdown
+exit
+
+(PC11)
+int Fa0
+10.1.11.5 255.255.255.0
+10.1.11.1 (Gateway)
+(PC22)
+int Fa0
+10.1.22.5 255.255.255.0
+10.1.22.1 (Gateway)
+
+
+-------------Scrap----------
+
+S       10.1.1.0/24 [1/0] via 10.111.1.2
+S       10.1.11.0/24 [1/0] via 10.111.1.2
+S       10.1.22.0/24 [1/0] via 10.111.1.2
+C       10.111.1.0/24 is directly connected, GigabitEthernet0/0
+L       10.111.1.1/32 is directly connected, GigabitEthernet0/0
+
+
+------Josh-------
+hostname KASUMI
+!
+!
+!
+enable secret 5 $1$mERr$hx5rVt7rPNoS4wqbXKX7m0
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+username professor secret 5 $1$mERr$5.a6P4JqbNiMX01usIfka/
+username student password 0 cisco123
+!
+!
+license udi pid CISCO1941/K9 sn FTX1524D60B-
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0
+ ip address 10.111.1.1 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip classless
+ip route 10.1.11.0 255.255.255.0 10.111.1.2 
+ip route 10.1.22.0 255.255.255.0 10.111.1.2 
+ip route 10.1.1.0 255.255.255.0 10.111.1.2 
+!
+ip flow-export version 9
+!
+!
+!
+!
+!
+!
+!
+!
+line con 0
+ logging synchronous
+ login local
+!
+line aux 0
+!
+line vty 0 4
+ login local
+--------------------------
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+interface FastEthernet0/1
+ switchport mode trunk
+!
+interface FastEthernet0/2
+!
+interface FastEthernet0/3
+!
+interface FastEthernet0/4
+!
+interface FastEthernet0/5
+!
+interface FastEthernet0/6
+!
+interface FastEthernet0/7
+!
+interface FastEthernet0/8
+!
+interface FastEthernet0/9
+!
+interface FastEthernet0/10
+!
+interface FastEthernet0/11
+ switchport access vlan 11
+ switchport mode access
+!
+interface FastEthernet0/12
+!
+interface FastEthernet0/13
+!
+interface FastEthernet0/14
+!
+interface FastEthernet0/15
+!
+interface FastEthernet0/16
+!
+interface FastEthernet0/17
+!
+interface FastEthernet0/18
+!
+interface FastEthernet0/19
+!
+interface FastEthernet0/20
+!
+interface FastEthernet0/21
+!
+interface FastEthernet0/22
+ switchport access vlan 22
+ switchport mode access
+!
+interface FastEthernet0/23
+!
+interface FastEthernet0/24
+!
+interface GigabitEthernet0/1
+ switchport mode trunk
+!
+interface GigabitEthernet0/2
+!
+interface Vlan1
+ ip address 10.1.1.5 255.255.255.0
+!
+ip default-gateway 10.1.1.1
+!
+!
+!
+!
+line con 0
+ logging synchronous
+ login local
+!
+line vty 0 4
+ login local
+line vty 5 15
+ login
+---------------------------------

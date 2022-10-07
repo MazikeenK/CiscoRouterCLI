@@ -1,0 +1,48 @@
+----------Soap--------------
+
+interface FastEthernet 0/1
+switchport mode access
+switchport port-security
+switchport port-security mac-address 000B.BEBA.EBEB
+exit
+interface FastEthernet 0/2
+switchport mode access
+switchport port-security
+switchport port-security mac-address 0090.0CD0.E792
+exit
+interface FastEthernet 0/3
+switchport mode access
+switchport port-security
+switchport port-security mac-address 0060.474B.E39B
+switchport port-security violation restrict
+exit
+interface FastEthernet 0/4
+switchport mode access
+switchport port-security
+switchport port-security mac-address 0001.C961.DCDB
+switchport port-security violation restrict
+exit
+
+-------------16_3------------
+
+---------S1--------
+interface FastEthernet 0/1
+switchport mode access
+switchport port-security
+switchport port-security violation restrict
+switchport port-security maximum 3
+no shutdown
+
+interface FastEthernet 0/2
+switchport mode access
+switchport port-security
+switchport port-security violation restrict
+switchport port-security maximum 5
+no shutdown
+
+interface FastEthernet 0/3
+switchport mode access
+switchport port-security
+switchport port-security violation restrict
+switchport port-security maximum 10
+no shutdown

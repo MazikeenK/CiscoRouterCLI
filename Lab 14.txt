@@ -1,0 +1,32 @@
+-------------14.2--------------------
+
+access-list 150 permit tcp host 192.168.33.3 host 172.22.242.23 eq www
+access-list 150 deny ip any host 172.22.242.23
+access-list 150 permit ip any any
+
+int gi0/1
+ip access-group 150 out
+
+
+
+---------------14.3--------------------
+conf t
+ip access-list standard ALLOWED
+deny 10.15.15.20
+permit any
+
+int gi0/1
+ip access-group ALLOWED out
+
+
+
+
+------------14.3 Alt---------------------
+conf t
+ip access-list standard ALLOWED
+10 permit 10.12.12.0 0.0.0.255 
+20 deny 10.15.15.20 0.0.0.0
+30 permit 10.15.15.21 0.0.0.0
+
+int gi0/1
+ip access-group ALLOWED out
